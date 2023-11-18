@@ -28,17 +28,15 @@ def get_rays(datapath, mode="train"):
         pose=open(datapath + f"/{mode}/pose/" + name).read().split()
         poses[i]=np.array(pose, dtype=np.float32).reshape(4,4)
 
-        name = intrinsics_file_names[i]
         intrinsic=open(datapath + f"/{mode}/intrinsics/" + name).read().split()
         intrinsics[i]=np.array(intrinsic, dtype=np.float32).reshape(4,4)
 
-        name = img_file_names[i]
-        img = imageio.imread(datapath + "/imgs/" + name) /255. # we normalize the image to [0,1] because conventions
+        img = imageio.imread(datapath + "/imgs/" + name.replace("txt", "png")) /255. # we normalize the image to [0,1] because conventions
 
         images.append(img[None, ...])
 
     images=np.concatenate(images, axis=0)
-    print(images.shape)
+    #print(images.shape)
 
     H=images.shape[1]
     W=images.shape[2]
