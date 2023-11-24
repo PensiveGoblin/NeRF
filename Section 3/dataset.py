@@ -38,7 +38,7 @@ def get_rays(datapath, mode="train"):
         images.append(img[None, ...])
 
     images=np.concatenate(images, axis=0)
-    print(images.shape)
+    #print(images.shape)
 
     H=images.shape[1]
     W=images.shape[2]
